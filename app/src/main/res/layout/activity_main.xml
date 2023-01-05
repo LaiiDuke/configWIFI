@@ -6,23 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/listen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginTop="19dp"
-        android:text="Listen"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+
 
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:background="@android:color/darker_gray"
-        android:layout_below="@+id/listen"
-        android:layout_alignParentStart="true"
+        android:layout_below="@+id/buttonSubmit"
         android:layout_marginTop="31dp" />
 
 
@@ -33,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/listview"
-        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
         android:text="List Devices" />
 
     <TextView
@@ -50,63 +41,67 @@
 
     <TextView
         android:id="@+id/nVal"
-        android:layout_width="50dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/listview"
         android:text="SSID"
-        android:textSize="10sp"
+        android:textSize="15sp"
         android:textStyle="italic"
-        android:layout_margin="15dp"/>
+        android:layout_margin="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"/>
 
     <EditText
         android:id="@+id/inputSSID"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
+        android:layout_toRightOf="@+id/nVal"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/listview"
-        android:layout_marginLeft="70dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="2dp"
         android:text="SSID"
-        android:textSize="10sp"
+        android:textSize="15sp"
         android:textStyle="italic" />
 
     <TextView
         android:id="@+id/bVal"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="Password"
-        android:textSize="10sp"
+        android:textSize="15sp"
         android:textStyle="italic"
         android:layout_below="@+id/nVal"
         android:layout_margin="10dp"/>
     <EditText
         android:id="@+id/inputPassword"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
+        android:layout_toRightOf="@+id/bVal"
         android:layout_height="wrap_content"
         android:layout_below="@+id/inputSSID"
-        android:layout_marginLeft="70dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="2dp"
         android:text="Password"
-        android:textSize="10sp"
+        android:textSize="15sp"
         android:textStyle="italic" />
 
     <TextView
         android:id="@+id/sVal"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="IP"
-        android:textSize="10sp"
+        android:textSize="15sp"
         android:textStyle="italic"
         android:layout_below="@+id/bVal"
         android:layout_margin="10dp"/>
+
     <EditText
         android:id="@+id/inputIP"
-        android:layout_width="150dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/inputPassword"
-        android:layout_marginLeft="70dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="2dp"
+        android:layout_toRightOf="@+id/sVal"
         android:text="IP"
-        android:textSize="10sp"
+        android:textSize="15sp"
         android:textStyle="italic" />
 
     <Button

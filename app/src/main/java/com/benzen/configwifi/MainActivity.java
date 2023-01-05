@@ -5,7 +5,6 @@ import static android.content.ContentValues.TAG;
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
-    Button listen, listDevices, submit;
+    Button listDevices, submit;
     ListView listView;
     TextView status;
     EditText SSID;
@@ -83,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
                     status.setText("Connection Failed");
                     break;
                 case STATE_MESSAGE_RECEIVED:
-                    status.setText(msg.toString());
                     break;
             }
             return true;
@@ -168,13 +166,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        listen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ServerClass serverClass = new ServerClass();
-                serverClass.start();
-            }
-        });
+//        listen.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ServerClass serverClass = new ServerClass();
+//                serverClass.start();
+//            }
+//        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -201,7 +199,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void findViewByIdes() {
-        listen = findViewById(R.id.listen);
         listView = findViewById(R.id.listview);
         status = findViewById(R.id.status);
         listDevices = findViewById(R.id.listDevices);
@@ -211,47 +208,47 @@ public class MainActivity extends AppCompatActivity {
         submit = findViewById(R.id.buttonSubmit);
     }
 
-    private class ServerClass extends Thread {
-        private BluetoothServerSocket serverSocket;
-
-        public ServerClass() {
-            try {
-                serverSocket = bluetoothAdapter.listenUsingRfcommWithServiceRecord(APP_NAME, MY_UUID);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        public void run() {
-            BluetoothSocket socket = null;
-
-            while (socket == null) {
-                try {
-                    Message message = Message.obtain();
-                    message.what = STATE_CONNECTING;
-                    handler.sendMessage(message);
-
-                    socket = serverSocket.accept();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    Message message = Message.obtain();
-                    message.what = STATE_CONNECTION_FAILED;
-                    handler.sendMessage(message);
-                }
-
-                if (socket != null) {
-                    Message message = Message.obtain();
-                    message.what = STATE_CONNECTED;
-                    handler.sendMessage(message);
-
-                    sendReceive = new SendReceive(socket);
-                    sendReceive.start();
-
-                    break;
-                }
-            }
-        }
-    }
+//    private class ServerClass extends Thread {
+//        private BluetoothServerSocket serverSocket;
+//
+//        public ServerClass() {
+//            try {
+//                serverSocket = bluetoothAdapter.listenUsingRfcommWithServiceRecord(APP_NAME, MY_UUID);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        public void run() {
+//            BluetoothSocket socket = null;
+//
+//            while (socket == null) {
+//                try {
+//                    Message message = Message.obtain();
+//                    message.what = STATE_CONNECTING;
+//                    handler.sendMessage(message);
+//
+//                    socket = serverSocket.accept();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                    Message message = Message.obtain();
+//                    message.what = STATE_CONNECTION_FAILED;
+//                    handler.sendMessage(message);
+//                }
+//
+//                if (socket != null) {
+//                    Message message = Message.obtain();
+//                    message.what = STATE_CONNECTED;
+//                    handler.sendMessage(message);
+//
+//                    sendReceive = new SendReceive(socket);
+//                    sendReceive.start();
+//
+//                    break;
+//                }
+//            }
+//        }
+//    }
 
     private class ClientClass extends Thread {
         private final BluetoothDevice device;
